@@ -1,0 +1,30 @@
+{
+  "extends": "@tsconfig/recommended",
+  "compilerOptions": {
+    "target": "ES2021",
+    "lib": [
+      "ES2021",
+      "ES2022.Object",
+    ],
+    "module": "ES2020",
+    "moduleResolution": "nodenext",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "useDefineForClassFields": true,
+    "strictPropertyInitialization": false,
+    "allowJs": true,
+    "strict": false
+  },
+  "include": ["src/**/*", "__tests__/**/*", "examples"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "docs"
+  ],
+}
