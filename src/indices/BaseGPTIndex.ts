@@ -168,13 +168,18 @@ export default abstract class BaseGPTIndex<IS extends V2IndexStruct> {
     queryKwargs: { [key: string]: any }
   ): void {}
 
-  async query(
-    queryStr: string | QueryBundle,
-    mode: string = QueryMode.DEFAULT,
-    queryTransform: BaseQueryTransform | null = null,
-    useAsync: boolean = false,
-    queryKwargs: { [key: string]: any } = {}
-  ) {
+  async query({
+    queryStr,
+    mode = QueryMode.DEFAULT,
+    queryTransform = null,
+    useAsync = false,
+    ...queryKwargs
+  }: {
+    queryStr: string | QueryBundle
+    mode: string
+    queryTransform: BaseQueryTransform | null
+    useAsync: boolean
+  }) {
     const modeEnum = QueryMode[mode]
     this._preprocessQuery(modeEnum, queryKwargs)
     const queryConfig = new QueryConfig({

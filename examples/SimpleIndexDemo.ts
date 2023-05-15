@@ -12,14 +12,16 @@ documents.then(async docs => {
 
   // STEP2
   index = GPTSimpleVectorIndex.loadFromDisk('examples/index_simple.json')
-  let response = await index.query('What did the author do growing up?')
+  let response = await index.query({
+    queryStr: 'What did the author do growing up?'
+  })
   console.log(response)
 
   // STEP3
   const queryBundle = new QueryBundle('What did the author do growing up?', [
     'The author grew up painting.'
   ])
-  response = await index.query(queryBundle)
+  response = await index.query({ queryStr: queryBundle })
   console.log(response)
   console.log(response.getFormattedSources())
 })

@@ -24,12 +24,10 @@ documents.then(async docs => {
     documents: docs,
     serviceContext
   })
-  const response = await index.query(
-    'What did the author do growing up?',
-    undefined,
-    undefined,
-    undefined,
-    { serviceContext, similarityTopK: 3 }
-  )
+  const response = await index.query({
+    queryStr: 'What did the author do growing up?',
+    serviceContext,
+    similarityTopK: 3
+  })
   console.log(response)
 })
