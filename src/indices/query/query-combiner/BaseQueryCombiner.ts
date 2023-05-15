@@ -119,7 +119,7 @@ export class MultiStepQueryCombiner extends BaseQueryCombiner {
   ) {
     super(indexStruct, queryTransform, queryRunner)
 
-    this._serviceContext = serviceContext || ServiceContext.fromDefaults()
+    this._serviceContext = serviceContext || ServiceContext.fromDefaults({})
     this._numSteps = numSteps
     this._earlyStopping = earlyStopping
     this._stopFn = stopFn || defaultStopFn

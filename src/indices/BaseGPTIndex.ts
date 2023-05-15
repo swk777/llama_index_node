@@ -34,7 +34,7 @@ export default abstract class BaseGPTIndex<IS extends V2IndexStruct> {
     if (indexStruct !== null && indexStruct !== undefined && nodes) {
       throw new Error('Only one of documents or indexStruct can be provided.')
     }
-    this._serviceContext = serviceContext || ServiceContext.fromDefaults()
+    this._serviceContext = serviceContext || ServiceContext.fromDefaults({})
     this._docstore = docstore || new DocumentStore()
     const init = (async () => {
       if (!indexStruct) {
@@ -60,7 +60,7 @@ export default abstract class BaseGPTIndex<IS extends V2IndexStruct> {
     docstore?: DocumentStore | null
     serviceContext?: ServiceContext | null
   }) {
-    serviceContext = serviceContext || ServiceContext.fromDefaults()
+    serviceContext = serviceContext || ServiceContext.fromDefaults({})
     docstore = docstore || new DocumentStore()
     for (const doc of documents) {
       docstore.setDocumentHash(doc.getDocId(), doc.getDocHash())

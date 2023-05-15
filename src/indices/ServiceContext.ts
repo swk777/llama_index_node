@@ -41,14 +41,21 @@ export default class ServiceContext {
     this.chunkSizeLimit = chunkSizeLimit
   }
 
-  static fromDefaults(
-    llmPredictor: LLMPredictor = null,
-    promptHelper: PromptHelper = null,
-    embedModel: BaseEmbedding | OpenAIEmbedding = null,
-    nodeParser: NodeParser | SimpleNodeParser = null,
-    llamaLogger: LlamaLogger = null,
-    chunkSizeLimit: number = null
-  ): ServiceContext {
+  static fromDefaults({
+    llmPredictor = null,
+    promptHelper = null,
+    embedModel = null,
+    nodeParser = null,
+    llamaLogger = null,
+    chunkSizeLimit = null
+  }: {
+    llmPredictor?: LLMPredictor
+    promptHelper?: PromptHelper
+    embedModel?: BaseEmbedding | OpenAIEmbedding
+    nodeParser?: NodeParser | SimpleNodeParser
+    llamaLogger?: LlamaLogger
+    chunkSizeLimit?: number
+  }): ServiceContext {
     llmPredictor = llmPredictor || new LLMPredictor()
     embedModel = embedModel || new OpenAIEmbedding()
     promptHelper =
