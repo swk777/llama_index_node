@@ -14,7 +14,7 @@ To install and run the project, use the following commands:
   node dist/examples/SimpleIndexDemo
 ```
 ## Available API
-You can refer to `example/SimpleIndexDemo.ts` for available APIs.
+You can refer to `example/` for available APIs.
 
 ## Contributions
 Get the raw python code from https://github.com/swk777/llama_index/tree/0.5.5
