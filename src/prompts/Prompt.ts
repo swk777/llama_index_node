@@ -14,7 +14,7 @@ export class Prompt {
   promptSelector?: ConditionalPromptSelector
   prompt?: BasePromptTemplate
   partialDict?: { [key: string]: any } = {}
-  promptKwargs: any
+  promptKwargs?: any
   stopToken?: string
   outputParser?: BaseOutputParser
 
