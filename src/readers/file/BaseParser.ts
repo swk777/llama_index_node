@@ -1,7 +1,15 @@
 // Output from an image parser.
-export interface ImageParserOutput {
-  text: string
-  image?: string
+export class ImageParserOutput {
+  // Output from an image parser.
+
+  text: string = ''
+  // base64 encoded image str
+  image: string | null = null
+
+  constructor(text, image) {
+    this.text = text
+    this.image = image
+  }
 }
 
 // Base class for all parsers

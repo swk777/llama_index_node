@@ -1,18 +1,33 @@
 import * as fs from 'fs/promises'
 import * as path from 'path'
 import * as glob from 'glob'
-// import { BaseReader } from './base_reader'
 import BaseReader from '../BaseReader.js'
-import { BaseParser } from './BaseParser.js'
+import { BaseParser, ImageParserOutput } from './BaseParser.js'
 import Document, { ImageDocument } from '../schema/Document.js'
-// import { BaseParser } from './base_parser'
-
-// Import the parsers you have created
-// ...
+import {
+  CSVParser,
+  DocxParser,
+  ImageParser,
+  MarkdownParser,
+  PDFParser
+} from './DocParser.js'
 
 // Update the DEFAULT_FILE_EXTRACTOR object with the appropriate parsers
-const DEFAULT_FILE_EXTRACTOR = {
-  // ... your parsers ...
+const DEFAULT_FILE_EXTRACTOR: Record<string, BaseParser> = {
+  // @ts-ignore
+  '.pdf': new PDFParser(),
+  // @ts-ignore
+  '.docx': new DocxParser(),
+  // @ts-ignore
+  '.pptx': new DocxParser(),
+  // @ts-ignore
+  '.jpg': new ImageParser(),
+  // @ts-ignore
+  '.png': new ImageParser(),
+  // @ts-ignore
+  '.csv': new CSVParser(),
+  // @ts-ignore
+  '.md': new MarkdownParser()
 }
 
 export class SimpleDirectoryReader extends BaseReader {
@@ -109,15 +124,13 @@ export class SimpleDirectoryReader extends BaseReader {
     if (!this.inputFiles) {
       throw new Error('Input files not set.')
     }
-    const dataList: string[] = []
+    const dataList: any[] = []
     const metadataList: (Record<string, unknown> | null)[] = []
     const imageDocs: ImageDocument[] = []
-
     for (const inputFile of this.inputFiles) {
       const ext = path.extname(inputFile)
       let data: any
-
-      if (this.fileExtractor.hasOwnProperty(ext)) {
+      if (this.fileExtractor[ext]) {
         const parser = this.fileExtractor[ext]
         data = await parser.parseFile(inputFile, this.errors)
       } else {
@@ -136,8 +149,17 @@ export class SimpleDirectoryReader extends BaseReader {
         metadata = this.fileMetadata(inputFile)
       }
 
-      if (data instanceof ImageDocument) {
-        imageDocs.push(data)
+      if (data instanceof ImageParserOutput) {
+        imageDocs.push(
+          new ImageDocument({
+            text: data.text,
+            extraInfo: metadata,
+            image: data.image
+          })
+        )
+      } else if (Array.isArray(data)) {
+        dataList.push(data)
+        metadataList.push(metadata)
       } else if (typeof data === 'string') {
         dataList.push(data)
         metadataList.push(metadata)
@@ -154,7 +176,6 @@ export class SimpleDirectoryReader extends BaseReader {
     } else {
       textDocs = dataList.map(d => new Document({ text: d }))
     }
-
     return [...textDocs, ...imageDocs]
   }
 }

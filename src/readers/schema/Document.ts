@@ -40,14 +40,21 @@ export default class Document extends BaseDocument {
 export class ImageDocument extends Document {
   image?: string
 
-  constructor(
-    text?: string,
-    docId?: string,
-    embedding?: number[],
-    docHash?: string,
-    extraInfo?: Record<string, unknown>,
+  constructor({
+    text,
+    docId,
+    embedding,
+    docHash,
+    extraInfo,
+    image
+  }: {
+    text?: string
+    docId?: string
+    embedding?: number[]
+    docHash?: string
+    extraInfo?: Record<string, unknown>
     image?: string
-  ) {
+  }) {
     super({ text, docId, embedding, docHash, extraInfo })
     this.image = image
   }
