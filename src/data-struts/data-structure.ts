@@ -116,7 +116,7 @@ export class IndexGraph extends V2IndexStruct {
     this.nodeIdToChildrenIds[nodeId] = childrenIds
   }
 
-  get_children(parentNode: Node | null): Dict<string> {
+  getChildren(parentNode: Node | null): Dict<string> {
     if (parentNode === null) {
       return this.rootNodes
     } else {
@@ -186,5 +186,63 @@ export class CompositeIndex extends V2IndexStruct {
       dataKey: dataDict
     }
     return outDict
+  }
+}
+
+export class IndexList extends V2IndexStruct {
+  nodes: string[] = []
+
+  addNode(node: Node): void {
+    this.nodes.push(node.getDocId())
+  }
+
+  static getType(): IndexStructType {
+    return IndexStructType.LIST
+  }
+  getType(): IndexStructType {
+    return IndexStructType.LIST
+  }
+}
+
+export class KeywordTable extends V2IndexStruct {
+  table: Map<string, Set<string>>
+
+  constructor() {
+    super()
+    this.table = new Map()
+  }
+
+  addNode(keywords: string[], node: Node): void {
+    for (let keyword of keywords) {
+      if (!this.table.has(keyword)) {
+        this.table.set(keyword, new Set())
+      }
+      this.table.get(keyword)!.add(node.getDocId())
+    }
+  }
+
+  get nodeIds(): Set<string> {
+    let nodeIds = new Set<string>()
+    for (let idSet of this.table.values()) {
+      for (let id of idSet) {
+        nodeIds.add(id)
+      }
+    }
+    return nodeIds
+  }
+
+  get keywords(): Set<string> {
+    return new Set(this.table.keys())
+  }
+
+  get size(): number {
+    return this.table.size
+  }
+
+  static getType(): IndexStructType {
+    return IndexStructType.KEYWORD_TABLE
+  }
+  getType(): IndexStructType {
+    return IndexStructType.KEYWORD_TABLE
   }
 }

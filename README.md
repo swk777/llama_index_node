@@ -27,7 +27,7 @@ To install and run the project, use the following commands:
 ```bash
   pnpm install
   pnpm build
-  node dist/examples/SimpleIndexDemo
+  node dist/examples/vector-indices/SimpleIndexDemo
 ```
 
 ## 📚 Available API

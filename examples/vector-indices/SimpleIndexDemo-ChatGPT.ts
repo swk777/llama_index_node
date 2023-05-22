@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv'
-import { SimpleDirectoryReader } from '../src/readers/file/SimpleDirectoryReader.js'
-import { GPTSimpleVectorIndex } from '../src/vector_stores/GPTSimpleVectorIndex.js'
-import LLMPredictor from '../src/llm_predictor/LLMPredictor.js'
+import { SimpleDirectoryReader } from '../../src/readers/file/SimpleDirectoryReader.js'
+import { GPTSimpleVectorIndex } from '../../src/vector_stores/GPTSimpleVectorIndex.js'
+import LLMPredictor from '../../src/llm_predictor/LLMPredictor.js'
 import { ChatOpenAI } from 'langchain/chat_models/openai'
-import ServiceContext from '../src/indices/ServiceContext.js'
+import ServiceContext from '../../src/indices/ServiceContext.js'
 
 dotenv.config()
 const documents = new SimpleDirectoryReader('examples/data').loadData()

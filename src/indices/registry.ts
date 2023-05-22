@@ -12,6 +12,13 @@ import {
   V2IndexStruct
 } from '../data-struts/data-structure.js'
 import { TYPE_KEY, DATA_KEY } from '../constants.js'
+import GPTListIndexEmbeddingQuery from './list/GPTListIndexEmbeddingQuery.js'
+import { GPTListIndexQuery } from './list/query.js'
+import {
+  GPTKeywordTableGPTQuery,
+  GPTKeywordTableRAKEQuery,
+  GPTKeywordTableSimpleQuery
+} from './keyword_table/query.js'
 
 // export const INDEX_STRUCT_TYPE_TO_INDEX_CLASS = {
 //   //   [IndexStructType.TREE]: GPTTreeIndex,
@@ -38,6 +45,15 @@ export const INDEX_STRUT_TYPE_TO_QUERY_MAP = {
   [IndexStructType.VECTOR_STORE]: {
     [QueryMode.DEFAULT]: GPTVectorStoreIndexQuery,
     [QueryMode.EMBEDDING]: GPTVectorStoreIndexQuery
+  },
+  [IndexStructType.LIST]: {
+    [QueryMode.DEFAULT]: GPTListIndexQuery,
+    [QueryMode.EMBEDDING]: GPTListIndexEmbeddingQuery
+  },
+  [IndexStructType.KEYWORD_TABLE]: {
+    [QueryMode.DEFAULT]: GPTKeywordTableGPTQuery,
+    [QueryMode.SIMPLE]: GPTKeywordTableSimpleQuery,
+    [QueryMode.RAKE]: GPTKeywordTableRAKEQuery
   }
 }
 // @ts-ignore

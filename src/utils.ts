@@ -19,7 +19,7 @@ class GlobalsHelper {
 
   public get stopwords(): Array<string> {
     if (!this._stopwords) {
-      this._stopwords = stopwords.words('english')
+      this._stopwords = stopwords.load('english')
     }
     return this._stopwords
   }
@@ -119,4 +119,13 @@ type CheckFn = (error: any) => boolean // Replace 'any' with the correct type
 // }
 export function isChatModel(llm: BaseLanguageModel): boolean {
   return llm._modelType() === 'base_chat_model'
+}
+
+export function zip(...arrays) {
+  const length = Math.min(...arrays.map(array => array.length))
+  const result = []
+  for (let i = 0; i < length; i++) {
+    result.push(arrays.map(array => array[i]))
+  }
+  return result
 }

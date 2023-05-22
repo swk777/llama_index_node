@@ -176,9 +176,9 @@ export default abstract class BaseGPTIndex<IS extends V2IndexStruct> {
     ...queryKwargs
   }: {
     queryStr: string | QueryBundle
-    mode: string
-    queryTransform: BaseQueryTransform | null
-    useAsync: boolean
+    mode?: string
+    queryTransform?: BaseQueryTransform | null
+    useAsync?: boolean
   }) {
     const modeEnum = QueryMode[mode]
     this._preprocessQuery(modeEnum, queryKwargs)

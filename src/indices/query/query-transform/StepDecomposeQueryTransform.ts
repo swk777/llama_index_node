@@ -22,15 +22,12 @@ export class StepDecomposeQueryTransform extends BaseQueryTransform {
     this.llmPredictor = llmPredictor || new LLMPredictor()
     this.stepDecomposeQueryPrompt =
       stepDecomposeQueryPrompt || DEFAULT_STEP_DECOMPOSE_QUERY_TRANSFORM_PROMPT
-    console.log(this.stepDecomposeQueryPrompt)
     this.verbose = verbose
   }
   // @ts-ignore
   public async _run(queryBundle: QueryBundle, extraInfo: Record<string, any>) {
     const indexStruct = extraInfo['index_struct'] as IndexStruct
     const indexText = indexStruct.getSummary()
-    console.log('indexText')
-    console.log(indexText)
     const prevReasoning = extraInfo['prev_reasoning'] as Response
     const fmtPrevReasoning = prevReasoning ? `\n${prevReasoning}` : 'None'
 

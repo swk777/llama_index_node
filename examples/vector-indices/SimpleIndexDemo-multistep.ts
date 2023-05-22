@@ -1,10 +1,10 @@
 import * as dotenv from 'dotenv'
-import { SimpleDirectoryReader } from '../src/readers/file/SimpleDirectoryReader.js'
-import { GPTSimpleVectorIndex } from '../src/vector_stores/GPTSimpleVectorIndex.js'
-import LLMPredictor from '../src/llm_predictor/LLMPredictor.js'
-import ServiceContext from '../src/indices/ServiceContext.js'
+import { SimpleDirectoryReader } from '../../src/readers/file/SimpleDirectoryReader.js'
+import { GPTSimpleVectorIndex } from '../../src/vector_stores/GPTSimpleVectorIndex.js'
+import LLMPredictor from '../../src/llm_predictor/LLMPredictor.js'
+import ServiceContext from '../../src/indices/ServiceContext.js'
 import { OpenAI } from 'langchain/llms/openai'
-import { StepDecomposeQueryTransform } from '../src/indices/query/query-transform/StepDecomposeQueryTransform.js'
+import { StepDecomposeQueryTransform } from '../../src/indices/query/query-transform/StepDecomposeQueryTransform.js'
 
 dotenv.config()
 const documents = new SimpleDirectoryReader('examples/data').loadData()

@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv'
-import { SimpleDirectoryReader } from '../src/readers/file/SimpleDirectoryReader.js'
-import { GPTSimpleVectorIndex } from '../src/vector_stores/GPTSimpleVectorIndex.js'
-import { QueryBundle } from '../src/indices/query/schema.js'
+import { SimpleDirectoryReader } from '../../src/readers/file/SimpleDirectoryReader.js'
+import { GPTSimpleVectorIndex } from '../../src/vector_stores/GPTSimpleVectorIndex.js'
+import { QueryBundle } from '../../src/indices/query/schema.js'
 
 dotenv.config()
 const documents = new SimpleDirectoryReader('examples/data').loadData()

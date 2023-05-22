@@ -67,3 +67,22 @@ export class RefinePrompt extends Prompt {
     this.inputVariables = inputVariables
   }
 }
+
+export class KeywordExtractPrompt extends Prompt {
+  constructor(template: string, promptKwargs?: Record<string, unknown>) {
+    super({ template, promptKwargs, inputVariables: ['text', 'max_keywords'] })
+    this.promptType = PromptType.KEYWORD_EXTRACT
+    this.inputVariables = ['text', 'max_keywords']
+  }
+}
+export class QueryKeywordExtractPrompt extends Prompt {
+  constructor(template: string, promptKwargs?: Record<string, unknown>) {
+    super({
+      template,
+      promptKwargs,
+      inputVariables: ['question', 'max_keywords']
+    })
+    this.promptType = PromptType.QUERY_KEYWORD_EXTRACT
+    this.inputVariables = ['question', 'max_keywords']
+  }
+}

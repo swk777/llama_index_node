@@ -8,15 +8,7 @@ import { SimpleVectorStore } from '../vector_stores/SimpleVectorStore.js'
 import { NodeEmbeddingResult, VectorStore } from '../vector_stores/types.js'
 import { llmTokenCounter } from '../token_counter/LLMTokenCounter.js'
 import { VECTOR_STORE_CONFIG_DICT_KEY } from '../constants.js'
-
-function zip(...arrays) {
-  const length = Math.min(...arrays.map(array => array.length))
-  const result = []
-  for (let i = 0; i < length; i++) {
-    result.push(arrays.map(array => array[i]))
-  }
-  return result
-}
+import { zip } from '../utils.js'
 
 function getNewId(existing_ids: Set<string>): string {
   let newId: string
